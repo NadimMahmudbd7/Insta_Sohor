@@ -17,9 +17,8 @@ const isLiked = (id) => {
 
 const addToLiked = (id) => {
   likedPostsId.push(id)
-  console.log(likedPostsId);
   likedPostsId.includes(id)
-    showPosts(posts);
+  reportPost();
 };
 
 const reportPost = (id) => {
@@ -27,6 +26,7 @@ const reportPost = (id) => {
     const remainingPosts = posts.filter((post) => !reportedPostsId.includes(post.id));
     showPosts(remainingPosts);
 };
+
 
 const displayContent = (text) => {
     return text.length < 30 ? text : text.slice(0, 30) + "<span class='fw-bold'>... read more</span>"
@@ -53,7 +53,6 @@ const switchTab = (id) => {
 };
 
 const createPost = (post) => {
-  console.log(post.comments[0]);
     const image = post.image;
     const div = document.createElement( "article" );
     div.classList.add( "post" );
@@ -144,7 +143,6 @@ const showPosts = (posts) => {
         productsContainer.appendChild(div);
     });
 };
-showPosts(posts)
 const displayLikedPosts = () => {
   document.getElementById( "liked" ).innerHTML = ""
     const likedPosts = getLikedPosts();
@@ -157,7 +155,8 @@ const displayLikedPosts = () => {
 const displayReportedPosts = () => {
   document.getElementById( "reported" ).innerHTML = ""
     const reportedPosts = getReportedPosts();
-    posts.forEach((post) => {
+    reportedPosts.forEach((post) => {
+      console.log(post);
         const div = createPost(post);
         document.getElementById( "reported" ).appendChild(div);
     });
